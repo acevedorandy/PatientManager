@@ -1,0 +1,101 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using PatientManager.Application.Helpers.web;
+@using PatientManager.Persistance.Models.ViewModel.administracion.usuario;
+@inject IHttpContextAccessor httpContext
+@{
+    UsuariosViewModel usuarios = httpContext.HttpContext.Session.Get<UsuariosViewModel>("usuario");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PatientManager.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PatientManager.Web.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="@(usuarios != null ? "Home" : "Login")" asp-action="Index">PatientManager.Web</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        @if (usuarios == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Register">Registrarse</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                            @switch (usuarios?.TipoUsuario)
+                            {
+                                case "Administrador":
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Medicos" asp-action="Index">Medicos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="PruebasLaboratorio" asp-action="Index">Pruebas del laboratorio</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Consultorios" asp-action="Index">Consultorios</a>
+                                    </li>
+                                    break;
+
+                                case "Asistente":
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Pacientes" asp-action="Index">Pacientes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Citas" asp-action="Index">Citas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="ResultadosLaboratorio" asp-action="Index">Resultados del laboratorio</a>
+                                    </li>
+                                    break;
+
+                            }
+                        }
+                    </ul>
+                    @if (usuarios != null)
+                    {
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="btn btn-danger text-white" asp-area="" asp-controller="Login" asp-action="LogOut">Cerrar sesión</a>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - PatientManager.Web - <a class="text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

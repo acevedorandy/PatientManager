@@ -1,0 +1,82 @@
+﻿@model PatientManager.Persistance.Models.administracion.UsuariosModel
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h1 class="text-center text-primary fw-bold">✏️ Editar Usuario</h1>
+        <hr />
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form asp-action="Edit" class="needs-validation" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <input type="hidden" asp-for="UsuarioID" /> 
+
+                    <div class="mb-3">
+                        <label asp-for="Nombre" class="form-label fw-bold text-secondary"></label>
+                        <input asp-for="Nombre" class="form-control" required />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Apellido" class="form-label fw-bold text-secondary"></label>
+                        <input asp-for="Apellido" class="form-control" required />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Correo" class="form-label fw-bold text-secondary"></label>
+                        <input asp-for="Correo" type="email" class="form-control" required />
+                        <span asp-validation-for="Correo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="NombreUsuario" class="form-label fw-bold text-secondary"></label>
+                        <input asp-for="NombreUsuario" class="form-control" required />
+                        <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Contraseña" class="form-label fw-bold text-secondary"></label>
+                        <input asp-for="Contraseña" type="password" class="form-control" required />
+                        <span asp-validation-for="Contraseña" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmarContraseña" class="form-label fw-bold text-secondary"></label>
+                        <input asp-for="ConfirmarContraseña" type="password" class="form-control" required />
+                        <span asp-validation-for="ConfirmarContraseña" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="TipoUsuario" class="form-label fw-bold text-secondary"></label>
+                            <select asp-for="TipoUsuario" asp-items="@ViewBag.TipoUsuario" class="form-select"></select>
+                        <span asp-validation-for="TipoUsuario" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="ConsultorioID" />
+
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Guardar Cambios
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left"></i> Volver a la Lista
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

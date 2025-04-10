@@ -1,0 +1,57 @@
+﻿@using PatientManager.Persistance.Models.ViewModel.administracion.usuario
+@using PatientManager.Domain.Entities.administracion
+@model LogInUserViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f8f9fa;">
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-5">
+                    <h3 class="text-center mb-4 fw-bold text-dark">Iniciar Sesión</h3>
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <form method="post" asp-controller="Login" asp-action="Index">
+                        <div class="mb-3">
+                            <label asp-for="NombreUsuario" class="form-label fw-semibold">Nombre de usuario</label>
+                            <input class="form-control p-3" asp-for="NombreUsuario" placeholder="Ingrese su usuario" required />
+                        </div>
+
+                        <div class="mb-3 position-relative">
+                            <label asp-for="Contraseña" class="form-label fw-semibold">Contraseña</label>
+                            <div class="input-group">
+                                <input class="form-control p-3" asp-for="Contraseña" type="password" placeholder="Ingrese su contraseña" id="passwordField" required />
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg py-2">Ingresar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* @section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            let passwordField = document.getElementById('passwordField');
+            let icon = this.querySelector('i');
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.classList.remove("bi-eye");
+                icon.classList.add("bi-eye-slash");
+            } else {
+                passwordField.type = "password";
+                icon.classList.remove("bi-eye-slash");
+                icon.classList.add("bi-eye");
+            }
+        });
+    </script>
+} *@

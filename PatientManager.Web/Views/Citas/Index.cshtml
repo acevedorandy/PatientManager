@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PatientManager.Persistance.Models.ViewModel.atencionmedica.CitaViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Citas";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-primary">📅 Lista de Citas</h1>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fas fa-plus"></i> Nueva Cita
+        </a>
+    </div>
+
+    <hr />
+
+    @if (Model == null || !Model.Any())
+    {
+            <div class="alert alert-warning text-center" role="alert">
+                <h4 class="mb-0">⚠ No hay citas registradas.</h4>
+            </div>
+    }
+    else
+    {
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered shadow-sm mt-3">
+                    <thead class="table-primary text-center">
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NombrePaciente)</th>
+                            <th>@Html.DisplayNameFor(model => model.NombreMedico)</th>
+                            <th>@Html.DisplayNameFor(model => model.FechaCita)</th>
+                            <th>@Html.DisplayNameFor(model => model.Hora)</th>
+                            <th>@Html.DisplayNameFor(model => model.Causa)</th>
+                            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                                <tr class="align-middle text-center">
+                                    <td>@Html.DisplayFor(modelItem => item.NombrePaciente)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NombreMedico)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.FechaCita)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Hora)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Causa)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.CitaID" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                                <a asp-action="Delete" asp-route-id="@item.CitaID" class="btn btn-outline-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+    }
+</div>
+
+@section Scripts {
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

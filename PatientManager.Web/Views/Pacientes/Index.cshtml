@@ -1,0 +1,70 @@
+﻿@model IEnumerable<PatientManager.Persistance.Models.atencionmedica.PacientesModel>
+
+@{
+    ViewData["Title"] = "Lista de Pacientes";
+}
+
+<div>
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-lg-start text-primary fw-bold my-4">🩺 Lista de Pacientes</h1>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fas fa-plus"></i> Agregar Nuevo Paciente
+        </a>
+    </div>
+
+    <hr />
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            <h4 class="mb-0">⚠ No hay pacientes registrados.</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm h-100">
+                        <img src="@item.Foto" alt="Foto de @item.Nombre" class="card-img-top" style="height: 200px; object-fit: cover;">
+
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">@item.Nombre @item.Apellido</h5>
+                            <p class="card-text"><i class="fas fa-id-card"></i> <strong>Cédula:</strong> @item.Cedula</p>
+                            <p class="card-text"><i class="fas fa-phone"></i> <strong>Teléfono:</strong> @item.Telefono</p>
+                            <p class="card-text"><i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong> @item.Direccion</p>
+                            <p class="card-text"><i class="fas fa-calendar-alt"></i> <strong>Fecha de Nacimiento:</strong> @item.FechaNacimiento.ToShortDateString()</p>
+                            <p class="card-text">
+                                <i class="fas fa-smoking"></i> <strong>Fumador:</strong>
+                                @if (item.Fumador)
+                                {
+                                    <span class="badge bg-danger">Sí</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">No</span>
+                                }
+                            </p>
+                            <p class="card-text"><i class="fas fa-exclamation-triangle"></i> <strong>Alergias:</strong> @item.Alergias</p>
+                        </div>
+
+                        <div class="card-footer text-center">
+                            <a asp-action="Edit" asp-route-id="@item.PacienteID" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.PacienteID" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </a>
+                            <a asp-controller="ResultadosLaboratorio" asp-action="ResultadosByPatient" asp-route-id="@item.PacienteID" class="btn btn-sm btn-outline-warning">
+                                <i class="fas fa-vials"></i> Resultados
+                            </a>
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

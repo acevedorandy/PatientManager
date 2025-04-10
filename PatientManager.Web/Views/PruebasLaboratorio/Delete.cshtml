@@ -1,0 +1,38 @@
+﻿@model PatientManager.Persistance.Models.laboratorio.PruebasLaboratorioModel
+
+@{
+    ViewData["Title"] = "Eliminar Prueba de Laboratorio";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-4 border-danger">
+        <h1 class="text-center text-danger fw-bold">Eliminar Prueba </h1>
+        <div class="alert alert-warning text-center fw-bold">
+            ⚠️ ¿Estás seguro de que deseas eliminar esta prueba?
+        </div>
+
+        <div class="card shadow-sm rounded p-4">
+            <dl class="row">
+                <dt class="col-sm-4 fw-bold">Nombre de la Prueba</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.NombrePrueba)</dd>
+            </dl>
+
+            <form asp-action="Delete" class="mt-3">
+                <input type="hidden" asp-for="PruebaID" />
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

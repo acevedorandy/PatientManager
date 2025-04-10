@@ -1,0 +1,51 @@
+﻿@model PatientManager.Application.Dtos.laboratorio.ResultadosLaboratorioDto
+
+@{
+    ViewData["Title"] = "Crear Resultado";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Crear Resultado de Laboratorio</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="mb-3">
+                    <label asp-for="PruebaID" class="form-label">Prueba</label>
+                    <select asp-for="PruebaID" asp-items="@ViewBag.Prueba" class="form-select"></select>
+                    <span asp-validation-for="PruebaID" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PacienteID" class="form-label">Paciente</label>
+                    <select asp-for="PacienteID" asp-items="@ViewBag.Paciente" class="form-select"></select>
+                    <span asp-validation-for="PacienteID" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ConsultorioID" class="form-label">Consultorio</label>
+                    <select asp-for="ConsultorioID" asp-items="@ViewBag.Consultorio" class="form-select"></select>
+                    <span asp-validation-for="ConsultorioID" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver a la lista
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> Guardar Resultado
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

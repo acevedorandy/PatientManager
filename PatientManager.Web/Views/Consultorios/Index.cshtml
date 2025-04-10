@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PatientManager.Persistance.Models.administracion.ConsultoriosModel>
+
+@{
+    ViewData["Title"] = "Lista de Consultorios";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-primary">🏥 Consultorio</h1>
+    </div>
+
+    <hr />
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            <h4 class="mb-0">⚠ No hay consultorios registrados.</h4>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered shadow-sm mt-3">
+                <thead class="table-primary text-center">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.NombreConsultorio)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="align-middle text-center">
+                            <td>@Html.DisplayFor(modelItem => item.NombreConsultorio)</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ConsultorioID" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

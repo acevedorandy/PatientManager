@@ -1,0 +1,73 @@
+﻿@model PatientManager.Persistance.Models.atencionmedica.CitasModel
+
+@{
+    ViewData["Title"] = "Editar Cita";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4><i class="fas fa-edit"></i> Editar Cita</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <input type="hidden" asp-for="CitaID" /> 
+
+                <div class="mb-3">
+                    <label asp-for="PacienteID" class="form-label fw-bold"></label>
+                    <select asp-for="PacienteID" asp-items="@ViewBag.Paciente" class="form-select"></select>
+                    <span asp-validation-for="PacienteID" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MedicoID" class="form-label fw-bold"></label>
+                    <select asp-for="MedicoID" asp-items="@ViewBag.Doctor" class="form-select"></select>
+                    <span asp-validation-for="MedicoID" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Fecha" class="form-label fw-bold"></label>
+                    <input asp-for="Fecha" class="form-control" type="date" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Hora" class="form-label fw-bold"></label>
+                    <select asp-for="Hora" class="form-select">
+                        <option value="">Seleccione una hora</option>
+                        @for (int i = 8; i <= 17; i++)
+                        {
+                            <option value="@i:00">@(i < 12 ? i + ":00 AM" : (i == 12 ? "12:00 PM" : (i - 12) + ":00 PM"))</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Hora" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Causa" class="form-label fw-bold"></label>
+                    <textarea asp-for="Causa" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Causa" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="EstadoID" class="form-label fw-bold"></label>
+                    <select asp-for="EstadoID" asp-items="@ViewBag.Estado" class="form-select"></select>
+                    <span asp-validation-for="EstadoID" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+                    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

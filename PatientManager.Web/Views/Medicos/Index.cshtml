@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PatientManager.Persistance.Models.atencionmedica.MedicosModel>
+
+@{
+    ViewData["Title"] = "Lista de Médicos";
+}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center my-4">
+        <h1 class="text-primary fw-bold">🩺 Lista de Médicos</h1>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fas fa-plus"></i> Agregar Nuevo Médico
+        </a>
+    </div>
+    <hr />
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            <h4 class="mb-0">⚠ No hay médicos registrados.</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-lg h-100">
+                        <img src="@item.Foto" class="card-img-top" alt="Foto de @item.Nombre" style="height: 250px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@item.Nombre @item.Apellido</h5>
+                            <p class="card-text text-muted">@item.Correo</p>
+                            <p class="card-text"><strong>Teléfono:</strong> @item.Telefono</p>
+                            <p class="card-text"><strong>Cédula:</strong> @item.Cedula</p>
+                            <div class="d-grid gap-2">
+                                <a asp-action="Edit" asp-route-id="@item.MedicoID" class="btn btn-sm btn-outline-primary">Editar</a>
+                                <a asp-action="Delete" asp-route-id="@item.MedicoID" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PatientManager.Persistance.Models.administracion.EstadosModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de los estados</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@if (Model == null || !Model.Any())
+{
+    <h2>No hay estados registrados</h2>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstadoID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadoID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.EstadoID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.EstadoID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EstadoID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

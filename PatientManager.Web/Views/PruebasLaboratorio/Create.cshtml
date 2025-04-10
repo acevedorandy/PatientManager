@@ -1,0 +1,39 @@
+﻿@model PatientManager.Application.Dtos.laboratorio.PruebasLaboratorioDto
+
+@{
+    ViewData["Title"] = "Crear Prueba de Laboratorio";
+}
+
+<div class="card shadow-lg mt-4">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Crear Prueba</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="NombrePrueba" class="form-label fw-bold"></label>
+                <input asp-for="NombrePrueba" class="form-control" />
+                <span asp-validation-for="NombrePrueba" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ConsultorioID" class="form-label fw-bold"></label>
+                <select asp-for="ConsultorioID" asp-items="@ViewBag.Consultorio" class="form-select"></select>
+                <span asp-validation-for="ConsultorioID" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

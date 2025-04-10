@@ -1,0 +1,61 @@
+﻿@model PatientManager.Persistance.Models.atencionmedica.MedicosModel
+
+@{
+    ViewData["Title"] = "Eliminar Médico";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-4 border-danger">
+
+        <h1 class="text-center text-danger fw-bold">Eliminar medico</h1>
+        <div class="alert alert-warning text-center fw-bold">
+            ⚠️ ¿Estás seguro de que deseas eliminar este medico?
+        </div>
+
+        <div class="card shadow-sm rounded p-4">
+            <dl class="row">
+                <dt class="col-sm-4 fw-bold">Nombre</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre) @Html.DisplayFor(model => model.Apellido)</dd>
+
+                <dt class="col-sm-4 fw-bold">Correo Electrónico</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Correo)</dd>
+
+                <dt class="col-sm-4 fw-bold">Teléfono</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Telefono)</dd>
+
+                <dt class="col-sm-4 fw-bold">Cédula</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cedula)</dd>
+
+                <dt class="col-sm-4 fw-bold">Foto</dt>
+                <dd class="col-sm-8">
+                    @if (Model != null && !string.IsNullOrEmpty(Model.Foto))
+                    {
+                        <img src="@Model.Foto" alt="Foto del paciente" class="img-thumbnail" width="120">
+                    }
+                    else
+                    {
+                        <span class="text-muted">No disponible</span>
+                    }
+                </dd>
+
+            </dl>
+
+            <form asp-action="Delete" class="mt-3">
+                <input type="hidden" asp-for="MedicoID" />
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

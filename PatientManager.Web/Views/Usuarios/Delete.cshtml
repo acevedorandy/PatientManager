@@ -1,0 +1,55 @@
+﻿@model PatientManager.Persistance.Models.administracion.UsuariosModel
+
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 border-danger">
+        <h1 class="text-center text-danger fw-bold">Eliminar Usuario</h1>
+        <hr />
+
+        <div class="alert alert-warning text-center fw-bold">
+            ⚠️ ¿Estás seguro de que deseas eliminar este usuario?
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4 text-secondary fw-bold">ID:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.UsuarioID)</dd>
+
+                    <dt class="col-sm-4 text-secondary fw-bold">Nombre:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                    <dt class="col-sm-4 text-secondary fw-bold">Apellido:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Apellido)</dd>
+
+                    <dt class="col-sm-4 text-secondary fw-bold">Correo:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Correo)</dd>
+
+                    <dt class="col-sm-4 text-secondary fw-bold">Usuario:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.NombreUsuario)</dd>
+
+                    <dt class="col-sm-4 text-secondary fw-bold">Tipo de Usuario:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.TipoUsuario)</dd>
+
+                    <dt class="col-sm-4 text-secondary fw-bold">Consultorio:</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.ConsultorioID)</dd>
+                </dl>
+
+                <form asp-action="Delete" class="mt-4">
+                    <input type="hidden" asp-for="UsuarioID" />
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Eliminar Usuario
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
